@@ -1,0 +1,65 @@
+<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=plugin&id=yyd_relation:buildrela&pluginop=add">
+<input type="hidden" name="formhash" value="{FORMHASH}" />
+<p class="tbmu">{lang yyd_relation:buildrelation}</p>
+<table cellspacing="0" cellpadding="0" class="tfm" style="table-layout:fixed;margin-top:10px;">
+<tbody>
+	<tr><td class="mtm pns">
+		<p>
+		<!--{if !$singleprem}-->
+			{lang yyd_relation:username}
+			<input name="usernamenew" id="usernamenew" type="text" class="px vm" value="$username" style="width:100px" tabindex="1" />&nbsp;
+		<!--{else}-->
+			{lang yyd_relation:username} <select name="usernamenew" id="usernamenew" class="ps vm">
+			<!--{loop $permusers $user}-->
+				<option value="$user"{if $user == $username} selected="selected"{/if}>$user</option>
+			<!--{/loop}-->
+			</select>
+		<!--{/if}-->
+		{lang yyd_relation:appellation} <input type="appellation" name="appellationnew" class="px vm" style="width:100px" tabindex="2" />
+		<br /><br />
+		<p>
+		<button type="submit" name="buildrelation" class="pn vm" value="yes" ><span>{lang yyd_relation:add}</span></button>
+		</p>
+	</td></tr>
+</tbody>
+</table>
+</form>
+<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=plugin&id=yyd_relation:buildrela&pluginop=delete">
+<input type="hidden" name="formhash" value="{FORMHASH}" />
+<!--{if $relationusers}-->
+	<table cellspacing="0" cellpadding="0" class="dt mtm">
+		<thead class="alt">
+			<tr><td width="40"></td><td width="140">{lang yyd_relation:username}</td><td>{lang yyd_relation:appellation}</td><td width="120">{lang yyd_relation:relastatus}</td></tr>
+		</thead>
+		<!--{loop $relationusers $user}-->
+		<tr>
+			<td><input name="deleteuser[]" type="checkbox" class="pc" value="$user[username]" /></td>
+			<td>$user[username]</td>
+			<td><b>$user[reladata]</b></td>
+			<td><!--{if $user[connect]}-->{lang yyd_relation:connect}<!--{else}-->{lang yyd_relation:unconnect}<!--{/if}--></td>
+		</tr>
+		<!--{/loop}-->
+		<tr class="bw0_all"><td><label for="chkall"><input class="pc" type="checkbox" id="chkall" name="chkall" onclick="checkall(this.form);" />{lang yyd_relation:selectall}</label></td>
+		<td class="mtm pns"><button type="submit" class="pn" name="delete" value="yes" ><span>{lang yyd_relation:delete}</span></button></td></tr>
+	</table>
+<!--{/if}-->
+</form>
+<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=plugin&id=yyd_relation:buildrela&pluginop=update">
+<input type="hidden" name="formhash" value="{FORMHASH}" />
+<!--{if $readyuser}-->
+	<table cellspacing="0" cellpadding="0" class="dt mtm">
+		<thead class="alt">
+			<tr><td width="40"></td><td width="140">{lang yyd_relation:username}</td><td>{lang yyd_relation:appellation}</td></tr>
+		</thead>
+		<!--{loop $readyuser $user}-->
+		<tr>
+			<td><input name="updates[]" type="checkbox" class="pc" value="$user" /></td>
+			<td>$user</td>
+			<td><input name="appellation[{$user}]" class="px" value="$user[appellation]" size="40" /></td>
+		</tr>
+		<!--{/loop}-->
+		<tr class="bw0_all"><td><label for="chkall"><input class="pc" type="checkbox" id="chkall" name="chkall" onclick="checkall(this.form);" />{lang yyd_relation:selectall}</label></td>
+		<td class="mtm pns"><button type="submit" class="pn" name="connect" value="yes" ><span>{lang yyd_relation:getconnect}</span></button></td></tr>
+	</table>
+<!--{/if}-->
+</form>
