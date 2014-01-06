@@ -105,6 +105,8 @@
 				<item id="viewall"><![CDATA[查看全部]]></item>
 				<item id="deleted"><![CDATA[- 已删除 -]]></item>
 				<item id="adduser_succeed"><![CDATA[与 {usernamenew} 建立关系成功。]]></item>
+				<item id="beadded"><![CDATA[ {username}申请于您建立关系{relation}。]]></item>
+				<item id="allowed"><![CDATA[ {username}已审核与您的关系为{relation}。]]></item>
 				<item id="deleteuser_succeed"><![CDATA[删除关系成功。]]></item>
 				<item id="updateuser_succeed"><![CDATA[审核关系成功。]]></item>
 				
