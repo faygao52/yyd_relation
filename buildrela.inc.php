@@ -40,6 +40,8 @@ if($_GET['pluginop'] == 'add' && submitcheck('buildrelation')) {
 		} else {
 			$_GET['commentnew'] = addslashes($_GET['commentnew']);
 			DB::query("INSERT INTO ".DB::table('yyd_relation')." (uid, username, reladata) VALUES ('$_G[uid]', '$usernamenew', '$reladata')");
+			$tuid =  C::t('common_member')->fetch_uid_by_username($usernamenew);
+			notification_add($tuid, 'system', 'yyd_relation:beadded',array('username'=>$_G[username],'relation'=>$reladata),1);
 		}
 		dsetcookie('mrn', '');
 		dsetcookie('mrd', '');
@@ -57,7 +59,8 @@ if($_GET['pluginop'] == 'add' && submitcheck('buildrelation')) {
 		$_GET['appellation'] = daddslashes($_GET['appellation']);
 		foreach($_GET['appellation'] as $user => $v) {
 			DB::query("INSERT INTO ".DB::table('yyd_relation')." (uid, username, reladata) VALUES ('$_G[uid]', '$user', '".strip_tags($v)."')");
-
+			$tuid =  C::t('common_member')->fetch_uid_by_username($user);
+			notification_add($tuid, 'system', 'yyd_relation:allowed',array('username'=>$_G[username],'relation'=>strip_tags($v)),1);
 		}
 	}
 	dsetcookie('mrn', '');
